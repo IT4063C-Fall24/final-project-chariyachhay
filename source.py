@@ -66,7 +66,7 @@ else:
     print(f"API request failed with status code: {response.status_code}")
 
 
-# In[12]:
+# In[46]:
 
 
 import pandas as pd
@@ -202,7 +202,7 @@ else:
     print(f"api request failed with status: {response.status_code}")
 
 
-# The graph above illustrates the relationship between incident counts and the time of day. I chose to use a line chart for this data because it effectively displays numerous points across each hour, allowing the highest counts of incidents to stand out clearly. The graph indicates that different neighborhoods experience their peak incident times at various hours. For instance, Mount Airy shows higher incident counts at night, particularly at 1 AM and 6 AM, while Westwood has more incidents in the afternoon, peaking around 3 PM. The neighborhoods with the highest counts are Mount Airy, Westwood, and West Price Hill, with each displaying distinct patterns in their incident occurrences throughout the day.
+# The graph above illustrates the relationship between incident counts and the time of day. I chose to use a line chart for this data because it effectively displays numerous points across each hour to me, allowing the highest counts of incidents to stand out clearly. The graph indicates that different neighborhoods experience their peak incident times at various hours. For instance, Mount Airy shows higher incident counts at night, particularly at 1 AM and 6 AM, while Westwood has more incidents in the afternoon, peaking around 3 PM. The neighborhoods with the highest counts are Mount Airy, Westwood, and West Price Hill with each displaying patterns in their incident occurrences throughout the day that are also valuable to look into.
 
 # In[39]:
 
@@ -245,7 +245,7 @@ plt.grid(axis='y')
 plt.show()
 
 
-# The graph shows the number of shootings across each month of the year. I chose a scatter plot for this data because it allows us to easily spot the months with the highest shooting counts and keeping it seperate from each months. The data suggests that shootings peak in the middle of the year, with June and July showing over 40 incidents. This might be due to warmer weather, as more people are outside and interacting. In contrast, colder months like February and March have the fewest shootings, likely because people spend less time outside.
+# The graph shows the number of shootings across each month of the year. I chose a scatter plot for this data because it allows us to easily spot the months with the highest shooting counts and keeping it seperate from each months. The data suggests that shootings peak in the middle of the year, with June and July showing over 40 incidents. I feel this might be due to warmer weather, as more people are outside and interacting with each other. But in contrast, the earlier and colder months like February and March have the fewest shootings likely because people spend less time outside and inside more isolated etc.
 
 # In[14]:
 
@@ -287,7 +287,7 @@ plt.tight_layout()
 plt.show()
 
 
-# This graph shows the types of use-of-force incidents in the top five neighborhoods, highlighting how often each type occurs within these areas in Cincinnati. The most common incidents appear to be "injury to prisoner" and the use of force methods like tasers or beanbags, especially in the neighborhoods of Over-the-Rhine (OTR) and Avondale. While I don't have a clear reason for Avondale's rates, OTR has numerous bars, where alcohol-related incidents may contribute to higher use of force. I chose a clustered bar chart to clearly represent the frequency of these incidents across neighborhoods, making it easy to compare multiple incident types without losing context on neighborhood-specific differences.
+# This graph shows the types of use of force incidents in the top five neighborhoods, highlighting how often each type occurs within these areas in Cincinnati. The most common incidents appear to be "injury to prisoner" and the use of force methods like tasers or beanbags (not sure what that even means honestly), especially in the neighborhoods of Over-the-Rhine (OTR) and Avondale. While I don't have a clear reason for Avondale's rates, I do know very well that OTR has many bars, so that makes sense for alcohol-related incidents to contribute to higher use of force. I chose a clustered bar chart to clearly represent the frequency of these incidents across neighborhoods, making it easy to compare multiple incident types without losing context on neighborhood-specific differences.
 
 # In[24]:
 
@@ -338,7 +338,7 @@ fig.update_layout(
 fig.show()
 
 
-# This graph illustrates the different types of incidents throughout the week. I used a stacked bar chart to visualize which days had the highest counts of incidents and the specific types involved. I noticed that "WAR" incidents were the most common across all days, which stands for "Weapons, Assault, and Robbery." While this term encompasses several types of incidents, it limits our ability to draw specific conclusions about the individual categories. Following WAR incidents, the next most common types are non-urgent and urgent welfare checks. I find it interesting that the incident type with the fewest occurrences shows a clear count, whereas the second least common type lacks a specific count, making it unique among the five incident types in the visualization.
+# This graph illustrates the different types of incidents throughout the week. I used a stacked bar chart to visualize which days had the highest counts of incidents and the specific types involved. I noticed that "WAR" incidents were the most common across all days, which I looked up online and found that it stands for "Weapons, Assault, and Robbery." Even though this term reprsents several types of incidents, it limits my ability to draw specific conclusions about the individual categories and the count of occurences for each. Following WAR incidents, the next most common types are non-urgent and urgent welfare checks. I find it interesting that the incident type with the fewest occurrence shows a clear count, but the second least common type does not display a specific count on top or inside the chart part making it appear nonexistent among the five incident types in the visualization.
 
 # ## Data Cleaning and Transformations
 # 
@@ -347,7 +347,11 @@ fig.show()
 # - Address anomalies and outliers.
 # - Convert and transform data types
 # 
-# In cleaning the dataset, I first tackled the missing values, which were present in various columns like "CFS_NO" and "SUBJECT_GENDER." For columns with only a few missing entries, I decided to fill them in with the most common value, while for others with significant gaps, like "LATITUDE_X" and "LONGITUDE_X," I chose to drop those rows to maintain data integrity. I also checked for duplicate values and found that there were none, which is a relief because it means my data is clean in that regard. When looking for anomalies, I noticed some unusually high values in the "PRIORITY" column, and I'll need to investigate those further to see if they skew the analysis. Additionally, I converted the "CREATE_TIME_INCIDENT" column to a datetime format to make it easier to work with during my analysis. Overall, my cleaning process will involve filling in missing data, checking for outliers, and ensuring all data types are appropriate for analysis, helping me prepare a solid dataset for further exploration.
+# WHile cleaning the dataset, I first worked on dealing with the missing values, which were clearly present in various columns like CFS_NO and SUBJECT_GENDER. For columns with only a few missing values, I decided to fill them in with the most common value as I felt that was reasonable how we did with other exploratory data analyses before this assignment. But for others with significant missing gaps, like LATITUDE_X and LONGITUDE_X, I chose to drop those rows to maintain data integrity and make it easier for me to work with the data. Next I moved on to check for duplicate values and found that there were none, which is comforting because it means my data is clean for the most part. When looking for anomalies, I noticed some unusually high values in the PRIORITY column and I wil need to investigate those more to see if they skew or badly effect the analysis. Then I converted the CREATE_TIME_INCIDENT column to a datetime format to make it easier to work with and for better readability on the visualizations section. Overall, my cleaning process involved filling in missing data, checking for outliers, and making sure all data types are appropriate for analysis to assist me in preparing a solid dataset for more advanced exploration to answer the project question.
+
+# ## Prior Feedback and Updates
+# 
+# Since I do not see any feedback from a peer for my final project for checkpoint 1 or from the TA or professor, I can not complete this.
 
 # ## Machine Learning Plan
 # 
@@ -357,7 +361,7 @@ fig.show()
 # *What resources and references have you used for this project?*
 # 📝 I have the 2 datasets the City of Cincinnati and 1 API from them as well. I might add more later on since I know there will be need for further research.
 
-# In[1]:
+# In[40]:
 
 
 # ⚠️ Make sure you run this cell at the end of your notebook before every submission!
