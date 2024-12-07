@@ -5,6 +5,8 @@
 # 
 # ![Banner](./assets/banner.jpeg)
 
+# ## Checkpoint 1
+
 # ## Topic
 # *What problem are you (or your stakeholder) trying to address?*
 # 📝 How do crime incidents in Cincinnati vary over time and across different neighborhoods? The problem I am trying to address is the impact of police response times and on crime rates in Cincinnati. One reason why many parents may worry about putting their kids for University of Cincinnati as the surrounding areas are high in crime rates and can be very dangerous. By evaluating these datasets and API, it can help local law enforcement and community stakeholders analyze the effectiveness of police operations and how resources are being allocated. With the Cincinnati Police Data Initiative dataset, we can identify trends that reveal how different types of crimes have a relationship with varied response times on different neighborhoods and time periods. For example, if longer response times are consistently involved with increased crime rates, this can highlight the areas that need additional officers or resources etc. to improve community safety. This project is meant to uncover patterns that can guide our law enforcement to make more efficient policing strategies and contribute to the overall safety and well-being of Cincinnati's residents, including UC students!!!
@@ -47,7 +49,7 @@
 # *How will you use the identified data to answer your project question?*
 # 📝 My approach to answering my project question is a systematic one. I will being by starting with data preparation and analysis. That means I will clean both the Police Calls for Service and Crime Incidents datasets, to make sure fields like timestamps and location data etc are all consistent. Then move onto handling any missing or irrelevant data so it will mess up later on in the project. Next, I will merge the two datasets by matching incidents based on time and location. This will allow me to link calls for service with the corresponding crime events. When I am calculating response times for each call it will help determine the time difference between when the call was made and when the officers actually arrived on the scene. Moving on, we will analyze how response times vary for the different types of crime like violent and property crimes. Then we can use those findings to investigate patterns in how severe they were. It can also help us assess whether delays in certain areas are contributing to crime patterns or affecting police effectiveness. Then finally I will use statistical methods to explore the relationship between response times and crime outcomes more closer, like through regression modeling for instance.
 
-# In[6]:
+# In[ ]:
 
 
 import pandas as pd
@@ -66,7 +68,7 @@ else:
     print(f"API request failed with status code: {response.status_code}")
 
 
-# In[46]:
+# In[ ]:
 
 
 import pandas as pd
@@ -79,7 +81,7 @@ print("Police Calls for Service Data (First 5 Rows):")
 print(calls_for_service_data.head())
 
 
-# In[20]:
+# In[ ]:
 
 
 import pandas as pd
@@ -92,9 +94,9 @@ print("Crime Incidents Data (First 5 Rows):")
 print(crime_incidents_data.head())
 
 
-# ## Checkpoint 2 
+# ## Checkpoint 2: Exploratory Data Analysis (EDA) & Visualization
 
-# ## Exploratory Data Analysis (EDA) & Visualization
+# 
 # 
 # - Produce statistical summaries of the data.
 # - Analyze data distributions of the data.
@@ -103,7 +105,7 @@ print(crime_incidents_data.head())
 # - Identify data types that need to be converted/transformed.
 # - Provide a detailed write-up on every item above.
 
-# In[37]:
+# In[60]:
 
 
 def analyze_dataframe(df, name):
@@ -150,7 +152,7 @@ for i in range(len(datasets)):
 
 # ## Data Visualizations
 
-# In[38]:
+# In[64]:
 
 
 import pandas as pd
@@ -204,7 +206,7 @@ else:
 
 # The graph above illustrates the relationship between incident counts and the time of day. I chose to use a line chart for this data because it effectively displays numerous points across each hour to me, allowing the highest counts of incidents to stand out clearly. The graph indicates that different neighborhoods experience their peak incident times at various hours. For instance, Mount Airy shows higher incident counts at night, particularly at 1 AM and 6 AM, while Westwood has more incidents in the afternoon, peaking around 3 PM. The neighborhoods with the highest counts are Mount Airy, Westwood, and West Price Hill with each displaying patterns in their incident occurrences throughout the day that are also valuable to look into.
 
-# In[39]:
+# In[58]:
 
 
 import pandas as pd
@@ -247,7 +249,7 @@ plt.show()
 
 # The graph shows the number of shootings across each month of the year. I chose a scatter plot for this data because it allows us to easily spot the months with the highest shooting counts and keeping it seperate from each months. The data suggests that shootings peak in the middle of the year, with June and July showing over 40 incidents. I feel this might be due to warmer weather, as more people are outside and interacting with each other. But in contrast, the earlier and colder months like February and March have the fewest shootings likely because people spend less time outside and inside more isolated etc.
 
-# In[14]:
+# In[57]:
 
 
 import pandas as pd
@@ -289,7 +291,7 @@ plt.show()
 
 # This graph shows the types of use of force incidents in the top five neighborhoods, highlighting how often each type occurs within these areas in Cincinnati. The most common incidents appear to be "injury to prisoner" and the use of force methods like tasers or beanbags (not sure what that even means honestly), especially in the neighborhoods of Over-the-Rhine (OTR) and Avondale. While I don't have a clear reason for Avondale's rates, I do know very well that OTR has many bars, so that makes sense for alcohol-related incidents to contribute to higher use of force. I chose a clustered bar chart to clearly represent the frequency of these incidents across neighborhoods, making it easy to compare multiple incident types without losing context on neighborhood-specific differences.
 
-# In[24]:
+# In[56]:
 
 
 import pandas as pd
@@ -357,11 +359,245 @@ fig.show()
 # 
 # Since the checkpoint 2 is now being due before the introduction to Machine Learning module, I can not complete this last criteria in the rubric for Checkpoint 2: Exploratory Data Analysis & Visualization.
 
+# ## Checkpoint 3: Machine Learning Implentation Process
+
+# ## 1. EDA process that allows for identifying issues
+# In my eda code I worked with all the missing values, inconsistencies, and possible outliers in the data sources by getting their basic stats, shape, and column descriptions. Ispecifically used summary statistics to spot patterns, like the neighborhoods with noticeably high incident rates, and identified missing dates or ages that I will have to fix so I can work with the data for prepare and process.
+# 
+# ## 2. Splitting the dataset into training and test sets
+# I decided to split the dataset into the most common way of 80% training and 20% test sets to make sure that I am getting the best evaluation of the models. This 80:20 ratio works well with my data because we have enough for training and there is remaining sufficient data for testing the model's performance on other unexpected data.
+# 
+# ## 3. Data cleaning process using scikit-learn pipelines
+# As for the data cleaning process, I will definitely use the scikit-learn pipeline automated data cleaning steps as suggested since it will significantly help with handling the missing values, scaling numerical features, and encoding categorical variables as I was able to learn in the diabetes lab. I will use the pipeline to keep consistency across all 4 data sources and reduce the chance of my human errors while in the processing part of the checkpoint.
+# 
+# ## 4. Data imputation
+# To resolve the missing values, especially the numbers, I used the mean as a replacement to refer to and keep the overall trends among the data. But for categorical data, which is more harder to fix missing data for, I filled those missing entries with a placeholder like “unknown” or “N/A.” This approach will prevent data loss and maintain data quality to the fullest.
+# 
+# ## 5. Data Scaling and Normalization  
+# I scaled the numerical features with `StandardScaler` which confirmed all variables were on the same scale and prevents models from favoring the larger values. Since the data was not limited in any way or bounded between specific ranges, I do not feel like normalization is required here.
+# 
+# ## 6. Handling of Categorical Data  
+# I transformed the categorical data using `OneHotEncoder`. This basically converted each category into binary columns and allows models to process the data that are not numbers effectively without introducing unintended ordinal relationships.
+# 
+# ## 7. Testing multiple algorithms and models 
+# I did not do this step correctly or to my best abilities here (so I will work on this further for the next checkpoint) but I plan on testing with the suggested various models like Random Forest and Logistic Regression to find the best fit for the dataset. I want each model to be evaluated on training and test sets to determine its accuracy and other performance metrics for me to figure out the analysis phase better.
+# 
+# ## 8. Evaluating the different models and choosing one
+# I plan to compare the models based on accuracy, precision, and the response time as I want to be able to correctly calculate that as that is my purpose of this unique question proposal to solve the response time from Cincinnati Police departments to different crime incidents in many varying areas.
+# 
+
+# "EDA: process captures insights and identifies issues to be addressed in the data cleaning steps"
+
+# In[6]:
+
+
+import pandas as pd
+import requests
+
+#load datasets
+api_url = 'https://data.cincinnati-oh.gov/resource/k59e-2pvf.json'
+response = requests.get(api_url)
+if response.status_code == 200:
+    api_data = pd.DataFrame(response.json())
+
+shootings_data = pd.read_csv(r'C:\Users\chari\Documents\Data Tech Analytics\CPD_Reported_Shootings_20241026.csv')
+use_of_force_data = pd.read_csv(r'C:\Users\chari\Documents\Data Tech Analytics\PDI__Police_Data_Initiative__Use_of_Force_20241026.csv')
+calls_data = pd.read_csv(r'C:\Users\chari\Documents\Data Tech Analytics\PDI__Police_Data_Initiative__Police_Calls_for_Service.csv', low_memory=False)
+
+#function to analyze a dataframe
+def analyze_dataframe(df, name):
+    #print shape of the dataframe
+    print(f"shape of {name}: {df.shape}")
+    
+    #print summary info
+    print(f"summary of {name}:")
+    print(df.info())
+    print("\n")
+    
+    #print statistics for numerical and categorical columns
+    print(f"statistics for {name}:")
+    try:
+        print(df.describe(include='all')) #show all columns if possible
+    except Exception as e:
+        print(f"error in describe() for {name}: {e}") #handle describe errors
+    print("\n")
+    
+    #check for duplicate records
+    duplicate_count = df.duplicated().sum()
+    print(f"number of duplicate records in {name}: {duplicate_count}\n") 
+    
+    #check for missing values
+    missing_values_count = df.isna().sum()
+    print(f"missing values in {name}:\n{missing_values_count}\n")
+
+#list of datasets and their names
+datasets = [api_data, shootings_data, use_of_force_data, calls_data]
+dataset_names = ['api data', 'shootings data', 'use of force data', 'calls data']
+
+#loop through datasets and analyze each
+for i in range(len(datasets)):
+    print(f"analyzing ")
+    analyze_dataframe(datasets[i], dataset_names[i])
+
+
+# "Prepare: splitting the dataset into training and test sets; with justification for the type of splitting chosen"
+
+# In[4]:
+
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+#load dataset (example for this checkpoint where it is only a draft of the ML step is one data source: shootings_data)
+shootings_data = pd.read_csv(r'C:\Users\chari\Documents\Data Tech Analytics\CPD_Reported_Shootings_20241026.csv')
+
+#inspect dataset w/ EDA
+print("shape of shootings_data:", shootings_data.shape)
+print(shootings_data.info())
+print(shootings_data.describe())
+print("missing values in shootings_data:\n", shootings_data.isna().sum())
+
+#split the dataset into training and test sets
+random_train_set, random_test_set = train_test_split(shootings_data, test_size=0.2, random_state=42)
+
+#print sizes of the splits
+print(f"training set size: {random_train_set.shape}")
+print(f"test set size: {random_test_set.shape}")
+
+
+# "Process: processing pipeline that handles missing data, handles categorical data, normalizes and scales the data, adds additional features (if needed), removes features if needed"
+
+# In[42]:
+
+
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
+
+#separate numerical and categorical features
+numerical_features = ['LATITUDE_X', 'LONGITUDE_X', 'Age', 'YearOccurred', 'DateOccurred', 'TimeOccurred']
+categorical_features = ['District', 'StreetBlock', 'SNA_NEIGHBORHOOD', 'Race', 'Sex', 'Type', 'DateTimeOccured', 'COMMUNITY_COUNCIL_NEIGHBORHOOD']
+
+#creatse transformers for numerical and categorical data
+numerical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='median')),  # Impute missing numerical values with the median
+    ('scaler', StandardScaler())                   # Scale numerical features
+])
+
+categorical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='most_frequent')),  # Impute missing categorical values with the most frequent value
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))     # One-hot encode categorical features
+])
+
+#combine transformers using ColumnTransformer
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numerical_transformer, numerical_features),
+        ('cat', categorical_transformer, categorical_features)
+    ])
+
+#split the data into training and test sets (80% training, 20% test)
+train_data, test_data = train_test_split(shootings_data, test_size=0.2, random_state=42)
+
+#separate features and target variable (assuming 'ShootID' is the target)
+X_train = train_data.drop(columns=['ShootID'])
+y_train = train_data['ShootID']
+
+X_test = test_data.drop(columns=['ShootID'])
+y_test = test_data['ShootID']
+
+#create a pipeline that includes the preprocessing steps
+pipeline = Pipeline(steps=[
+    ('preprocessor', preprocessor)
+])
+
+#it pipeline on the training data
+pipeline.fit(X_train)
+
+#transform training and test data
+X_train_processed = pipeline.transform(X_train)
+X_test_processed = pipeline.transform(X_test)
+
+#shape of the transformed data to verify it worked fine
+print(f"Transformed training set size: {X_train_processed.shape}")
+print(f"Transformed test set size: {X_test_processed.shape}")
+
+
+# "Analyze: implementing different models and algorithms, and evaluating their performance using appropriate metrics and comparison with the test set"
+
+# In[43]:
+
+
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+import pandas as pd
+
+df = pd.read_csv(r'C:\Users\chari\Documents\Data Tech Analytics\PDI__Police_Data_Initiative__Police_Calls_for_Service.csv')
+
+#calculate response time
+df['ARRIVAL_TIME_PRIMARY_UNIT'] = pd.to_datetime(df['ARRIVAL_TIME_PRIMARY_UNIT'])
+df['DISPATCH_TIME_PRIMARY_UNIT'] = pd.to_datetime(df['DISPATCH_TIME_PRIMARY_UNIT'])
+df['response_time'] = (df['ARRIVAL_TIME_PRIMARY_UNIT'] - df['DISPATCH_TIME_PRIMARY_UNIT']).dt.total_seconds() / 60
+
+#handle missing values in response_time column
+df['response_time'].fillna(df['response_time'].mean(), inplace=True)
+
+#define features and target variable
+X = df.drop(columns=['response_time'])
+y = df['response_time']
+
+#split data into training and testing sets (80:20 RATIO)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#create a pipeline for processing number features
+numeric_features = X.select_dtypes(include=['int64', 'float64']).columns
+numeric_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='mean')),  # Handle missing values
+    ('scaler', StandardScaler())  # Scale numerical features
+])
+
+#process numerical features
+X_train_processed = numeric_pipeline.fit_transform(X_train[numeric_features])
+X_test_processed = numeric_pipeline.transform(X_test[numeric_features])
+
+#model 1: linear regression
+linear_model = LinearRegression()
+linear_model.fit(X_train_processed, y_train)
+y_pred_linear = linear_model.predict(X_test_processed)
+
+#model 2: random forest regressor
+rf_model = RandomForestRegressor(random_state=42)
+rf_model.fit(X_train_processed, y_train)
+y_pred_rf = rf_model.predict(X_test_processed)
+
+#evaluate models
+def evaluate_model(y_true, y_pred, model_name):
+    mae = mean_absolute_error(y_true, y_pred)
+    mse = mean_squared_error(y_true, y_pred)
+    r2 = r2_score(y_true, y_pred)
+    print(f'{model_name} - Mean Absolute Error: {mae}')
+    print(f'{model_name} - Mean Squared Error: {mse}')
+    print(f'{model_name} - R-squared: {r2}')
+
+#more eval
+evaluate_model(y_test, y_pred_linear, 'Linear Regression')
+evaluate_model(y_test, y_pred_rf, 'Random Forest')
+
+
+
 # ## Resources and References
 # *What resources and references have you used for this project?*
 # 📝 I have the 2 datasets the City of Cincinnati and 1 API from them as well. I might add more later on since I know there will be need for further research.
 
-# In[40]:
+# In[ ]:
 
 
 # ⚠️ Make sure you run this cell at the end of your notebook before every submission!
